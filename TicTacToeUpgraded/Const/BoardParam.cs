@@ -8,8 +8,11 @@ namespace TicTacToeUpgraded.Const
 {
     public class BoardParam
     {
-        public static char[,] board = new char[_sizeX, _sizeY];
-        private const int _sizeX = 3;
-        private const int _sizeY = 3;
+        private static int sizeX = 3;
+        private static int sizeY = 3;
+
+        public void ChangeSize(int input) => sizeX = sizeY = input;
+        public static int GetSizeX() => sizeX;
+        public static int GetSizeY() => sizeY;
     }
 }
