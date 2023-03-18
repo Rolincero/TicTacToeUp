@@ -7,7 +7,7 @@ using TicTacToeUpgraded.Const;
 
 namespace TicTacToeUpgraded.Logic
 {
-    public class Ckecks
+    public class Checks
     {
         public static bool BoardIsFull()
         {

@@ -11,9 +11,18 @@ namespace Game
         static void Main() 
         {
             Board board = new Board();
+            Player player = new Player();
 
             board.Init();
-            board.Show();
+
+            do
+            {
+                board.Show();
+                player.Move();
+                board.Show();
+            } while (Checks.BoardIsFull());
+
+
             
         }
     }

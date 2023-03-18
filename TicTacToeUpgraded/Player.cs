@@ -14,7 +14,7 @@ namespace TicTacToeUpgraded
         private static int pos_x;
         private static int pos_y;
 
-        private static void SetSign(int x, int y)
+        private void SetSign(int x, int y)
         {
             try
             {
@@ -28,9 +28,9 @@ namespace TicTacToeUpgraded
             }
         }
 
-        public static void Move()
+        public void Move()
         {
-            Console.Write("Введите X и Y координату через пробел: ");
+            Console.Write("\nВведите X и Y координату через пробел: ");
             try
             {
                 string inp = Console.ReadLine();
@@ -42,7 +42,7 @@ namespace TicTacToeUpgraded
             {
                 Console.WriteLine(ex.Message);
             }
-            if (Ckecks.CheckPos(pos_x, pos_y))
+            if (Checks.CheckPos(pos_x, pos_y))
             {
                 SetSign(pos_x, pos_y);
             }
