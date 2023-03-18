@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using TicTacToeUpgraded.Const;
@@ -20,17 +21,19 @@ namespace TicTacToeUpgraded.Players
 
         public static bool SetAiMoveStatus(bool input) => AiMoveStatus = input;
 
-        public static void Think()
+        public void Think()
         {
+            ResetAnalysis();
             Distruct();
             Analyze();
+            Decision();
             if (!AiMoveStatus)
             {
                 RndMove();
             }
         }
 
-        public static void Move(int x, int y)
+        private void Move(int x, int y)
         {
             if (Checks.BoardIsFull())
             {
@@ -55,11 +58,11 @@ namespace TicTacToeUpgraded.Players
             else Checks.BoardIsFull();
         }
 
-        private static void RndMove()
+        private void RndMove()
         {
-            int x = random.Next(0, Board.board.GetLength(0) - 1);
+            int x = random.Next(0, Board.board.GetLength(0));
             Thread.Sleep(10);
-            int y = random.Next(0, Board.board.GetLength(1) - 1);
+            int y = random.Next(0, Board.board.GetLength(1));
             if (Checks.CheckPos(x, y))
             {
                 Move(x, y);
@@ -67,7 +70,7 @@ namespace TicTacToeUpgraded.Players
             else Think();
         }
 
-        private static void Distruct()
+        private void Distruct()
         {
             for (int i = 0; i < horisontal.Length; i++)
             {
@@ -83,14 +86,14 @@ namespace TicTacToeUpgraded.Players
                 {
                     diagonalRight[i] = Board.board[i, i];
                 }
-                for (int i = 0, j = Board.board.GetLength(0); i < diagonalLeft.Length; i++, j--)
+                for (int i = 0, j = Board.board.GetLength(0) - 1; i < diagonalLeft.Length; i++, j--)
                 {
                     diagonalLeft[i] = Board.board[i, j];
                 }
             }
         }
 
-        private static void Analyze()
+        private void Analyze()
         {
             foreach (char item in horisontal)
             {
@@ -119,6 +122,40 @@ namespace TicTacToeUpgraded.Players
                 {
                     analyze[3] += 1;
                 }
+            }
+        }
+
+        private void Decision()
+        {
+                if (analyze[2] == 2)
+                {
+                    //Move(Player.pos_x, FindFreePos(diagonalRight));
+                    SetAiMoveStatus(true);
+                }
+                else if (analyze[3] == 2)
+                {
+
+                    SetAiMoveStatus(true);
+                }
+                else if (analyze[0] == 2)
+                {
+                    Move(Player.pos_x, FindFreePos(horisontal));
+                    SetAiMoveStatus(true);
+                }
+                else if (analyze[1] == 2)
+                {
+                    Move(FindFreePos(vertical), Player.pos_y);
+                    SetAiMoveStatus(true);
+                }
+
+        }
+
+        private int FindFreePos(char[] input) => Array.IndexOf(input, Signs.Empty);
+        private void ResetAnalysis()
+        {
+            for (int i = 0; i < analyze.Length; i++)
+            {
+                analyze[i] = 0;
             }
         }
     }
