@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.PortableExecutable;
+using System.Text;
+using System.Threading.Tasks;
+using TicTacToeUpgraded.Const;
+using TicTacToeUpgraded.Logic;
+
+namespace TicTacToeUpgraded
+{
+    public class Player
+    {
+        private static int pos_x;
+        private static int pos_y;
+
+        private static void SetSign(int x, int y)
+        {
+            try
+            {
+                Board.board[x, y] = Signs.Player;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Такое значение вне игрового поля!");
+                Console.WriteLine(ex.StackTrace);
+                Move();
+            }
+        }
+
+        public static void Move()
+        {
+            Console.Write("Введите X и Y координату через пробел: ");
+            try
+            {
+                string inp = Console.ReadLine();
+                string[] res = inp.Split(' ');
+                pos_x = int.Parse(res[0]) - 1;
+                pos_y = int.Parse(res[1]) - 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            if (Ckecks.CheckPos(pos_x, pos_y))
+            {
+                SetSign(pos_x, pos_y);
+            }
+            else
+            {
+                Move();
+            }
+        }
+    }
+}
