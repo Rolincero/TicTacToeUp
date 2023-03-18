@@ -18,6 +18,7 @@ namespace TicTacToeUpgraded.Logic
                     return true;
                 }
             }
+            Console.WriteLine("\n\nНичья!\n");
             return false;
         }
 
