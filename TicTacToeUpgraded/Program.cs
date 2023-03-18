@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using TicTacToeUpgraded;
 using TicTacToeUpgraded.Logic;
+using TicTacToeUpgraded.Players;
 
 namespace Game
 {

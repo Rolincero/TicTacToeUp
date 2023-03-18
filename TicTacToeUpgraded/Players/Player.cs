@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TicTacToeUpgraded.Const;
 using TicTacToeUpgraded.Logic;
 
-namespace TicTacToeUpgraded
+namespace TicTacToeUpgraded.Players
 {
     public class Player
     {
