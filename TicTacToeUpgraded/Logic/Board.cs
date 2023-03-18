@@ -12,13 +12,13 @@ namespace TicTacToeUpgraded
         public static char[,] board = new char[BoardParam.GetSizeX(), BoardParam.GetSizeY()];
         public void Init()
         {
-            for (int i = 0; i < board.GetLength(0); i++)
-            {
-                for (int j = 0; j < board.GetLength(1); j++)
+                for (int i = 0; i < board.GetLength(0); i++)
                 {
-                    board[i, j] = Signs.Empty;
+                    for (int j = 0; j < board.GetLength(1); j++)
+                    {
+                        board[i, j] = Signs.Empty;
+                    }
                 }
-            }
         }
         public void Show()
         {

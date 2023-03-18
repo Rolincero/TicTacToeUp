@@ -11,8 +11,8 @@ namespace TicTacToeUpgraded.Players
 {
     public class Player
     {
-        private static int pos_x;
-        private static int pos_y;
+        public static int pos_x;
+        public static int pos_y;
 
         private void SetSign(int x, int y)
         {
