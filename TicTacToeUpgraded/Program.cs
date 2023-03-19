@@ -13,7 +13,6 @@ namespace Game
         {
             Board board = new Board();
             Player player = new Player();
-            Ai ai = new Ai();
 
             board.Init();
 
@@ -22,7 +21,7 @@ namespace Game
                 board.Show();
                 player.Move();
                 board.Show();
-                ai.Think();
+                Ai.Think();
                 Ai.SetAiMoveStatus(false);
             } while (Checks.BoardIsFull());
         }
