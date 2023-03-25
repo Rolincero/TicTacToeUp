@@ -41,13 +41,5 @@ namespace TicTacToeUpgraded.Logic
                 return false;
             }
         }
-
-        public static void PlayerWin()
-        {
-            if (Ai.analyze[0] == 3 || Ai.analyze[1] == 3 || Ai.analyze[2] == 3 || Ai.analyze[3] == 3)
-            {
-                Console.WriteLine("Player WIN!");
-            }
-        }
     }
 }
