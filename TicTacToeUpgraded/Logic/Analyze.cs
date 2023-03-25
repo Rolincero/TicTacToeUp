@@ -10,6 +10,13 @@ namespace TicTacToeUpgraded.Logic
 {
     internal class Analyze
     {
+        public static void TryGetCenter()
+        {
+            if (Checks.CheckPos(1, 1))
+            {
+                Ai.Move(1, 1);
+            }
+        }
         public static void Distruct()
         {
             for (int i = 0; i < Ai.horisontal.Length; i++)
@@ -20,16 +27,13 @@ namespace TicTacToeUpgraded.Logic
             {
                 Ai.vertical[i] = Board.board[i, Player.pos_y];
             }
-            if (Player.pos_x == Player.pos_y)
+            for (int i = 0; i < Ai.diagonalRight.Length; i++)
             {
-                for (int i = 0; i < Ai.diagonalRight.Length; i++)
-                {
-                    Ai.diagonalRight[i] = Board.board[i, i];
-                }
-                for (int i = 0, j = Board.board.GetLength(0) - 1; i < Ai.diagonalLeft.Length; i++, j--)
-                {
-                    Ai.diagonalLeft[i] = Board.board[i, j];
-                }
+                Ai.diagonalRight[i] = Board.board[i, i];
+            }
+            for (int i = 0, j = Board.board.GetLength(0) - 1; i < Ai.diagonalLeft.Length; i++, j--)
+            {
+                Ai.diagonalLeft[i] = Board.board[j, i];
             }
         }
 
@@ -67,30 +71,41 @@ namespace TicTacToeUpgraded.Logic
 
         public static void Decision()
         {
-            if (Ai.analyze[2] == 2)
+            if (Ai.analyze[2] == 2 && FindFreePos(Ai.diagonalLeft).Item2 && FindFreePos(Ai.diagonalRight).Item2)
             {
-                //Move(Player.pos_x, FindFreePos(diagonalRight));
+                Ai.Move(FindFreePos(Ai.diagonalRight).Item1, FindFreePos(Ai.diagonalLeft).Item1);
                 Ai.SetAiMoveStatus(true);
             }
-            else if (Ai.analyze[3] == 2)
+            else if (Ai.analyze[3] == 2 && FindFreePos(Ai.diagonalLeft).Item2 && FindFreePos(Ai.diagonalRight).Item2)
             {
-
+                Ai.Move(FindFreePos(Ai.diagonalLeft).Item1, FindFreePos(Ai.diagonalRight).Item1);
                 Ai.SetAiMoveStatus(true);
             }
-            else if (Ai.analyze[0] == 2 && Checks.CheckPos(Player.pos_x, FindFreePos(Ai.horisontal)))
+            else if (Ai.analyze[0] == 2 && Checks.CheckPos(Player.pos_x, FindFreePos(Ai.horisontal).Item1))
             {
-                Ai.Move(Player.pos_x, FindFreePos(Ai.horisontal));
+                Ai.Move(Player.pos_x, FindFreePos(Ai.horisontal).Item1);
                 Ai.SetAiMoveStatus(true);
             }
-            else if (Ai.analyze[1] == 2 && Checks.CheckPos(FindFreePos(Ai.vertical), Player.pos_y))
+            else if (Ai.analyze[1] == 2 && Checks.CheckPos(FindFreePos(Ai.vertical).Item1, Player.pos_y))
             {
-                Ai.Move(FindFreePos(Ai.vertical), Player.pos_y);
+                Ai.Move(FindFreePos(Ai.vertical).Item1, Player.pos_y);
                 Ai.SetAiMoveStatus(true);
             }
 
         }
 
-        public static int FindFreePos(char[] input) => Array.IndexOf(input, Signs.Empty);
+        public static (int,bool) FindFreePos(char[] input)
+        {
+            if (Array.IndexOf(input, Signs.Empty) == -1)
+            {
+                return (Array.IndexOf(input, Signs.Empty), false);
+            }
+            else
+            {
+                return (Array.IndexOf(input, Signs.Empty), true);
+            }
+        }
+
         public static void ResetAnalysis()
         {
             for (int i = 0; i < Ai.analyze.Length; i++)

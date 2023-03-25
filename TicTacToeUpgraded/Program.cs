@@ -21,9 +21,11 @@ namespace Game
                 board.Show();
                 player.Move();
                 board.Show();
+                Checks.PlayerWin();
                 Ai.Think();
                 Ai.SetAiMoveStatus(false);
             } while (Checks.BoardIsFull());
+            Console.WriteLine("\nНичья!");
         }
     }
 }

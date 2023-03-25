@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TicTacToeUpgraded.Const;
+using TicTacToeUpgraded.Players;
 
 namespace TicTacToeUpgraded.Logic
 {
@@ -18,7 +19,6 @@ namespace TicTacToeUpgraded.Logic
                     return true;
                 }
             }
-            Console.WriteLine("\n\nНичья!\n");
             return false;
         }
 
@@ -39,6 +39,14 @@ namespace TicTacToeUpgraded.Logic
             catch
             {
                 return false;
+            }
+        }
+
+        public static void PlayerWin()
+        {
+            if (Ai.analyze[0] == 3 || Ai.analyze[1] == 3 || Ai.analyze[2] == 3 || Ai.analyze[3] == 3)
+            {
+                Console.WriteLine("Player WIN!");
             }
         }
     }

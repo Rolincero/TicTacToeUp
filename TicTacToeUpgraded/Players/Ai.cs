@@ -23,6 +23,7 @@ namespace TicTacToeUpgraded.Players
 
         public static void Think()
         {
+            Analyze.TryGetCenter();
             Analyze.ResetAnalysis();
             Analyze.Distruct();
             Analyze.Do();
