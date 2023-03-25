@@ -10,15 +10,18 @@ namespace TicTacToeUpgraded.Logic
 {
     public class Checks
     {
+        public static bool GameProgress = true;
         public static bool BoardIsFull()
         {
             foreach (var item in Board.board)
             {
                 if (item == '.')
                 {
+                    GameProgress = true;
                     return true;
                 }
             }
+            GameProgress = false;
             return false;
         }
 
@@ -40,6 +43,22 @@ namespace TicTacToeUpgraded.Logic
             {
                 return false;
             }
+        }
+
+        public static void WhoWin()
+        {
+            PlayerWin();
+            AiWin();
+        }
+
+        private static void PlayerWin()
+        {
+            
+        }
+
+        private static void AiWin()
+        {
+
         }
     }
 }
