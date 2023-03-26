@@ -15,16 +15,33 @@ namespace Game
             Player player = new Player();
 
             board.Init();
-
             do
             {
                 board.Show();
                 player.Move();
+                if (Checks.WhoWin().Item1)
+                {
+                    board.Show();
+                    Checks.PWinMsg();
+                    Console.ReadKey();
+                    break;
+                }
                 board.Show();
                 Ai.Think();
+                if (Checks.WhoWin().Item2)
+                {
+                    board.Show();
+                    Checks.AWinMsg();
+                    Console.ReadKey();
+                    break;
+                }
                 Ai.SetAiMoveStatus(false);
             } while (Checks.GameProgress);
-            Console.WriteLine("\nНичья!");
+            if (!Checks.BoardIsFull())
+            {
+                Console.WriteLine("\nНичья!");
+                Console.ReadKey();
+            }
         }
     }
 }
