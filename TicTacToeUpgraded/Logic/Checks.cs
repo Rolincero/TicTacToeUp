@@ -15,8 +15,6 @@ namespace TicTacToeUpgraded.Logic
         public static bool GameProgress = true;
         private static char[,] checker = new char[8, 3];
         private static string Strchecker = " ";
-        private static char[] PWinRule = { 'X', 'X', 'X' };
-        private static char[] AWinRule = { 'O', 'O', 'O' };
 
         public static bool BoardIsFull()
         {
